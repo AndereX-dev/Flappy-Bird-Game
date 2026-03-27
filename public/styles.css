@@ -28,6 +28,7 @@
   top: 40vh;
   left: 30vw;
   z-index: 100;
+  transition: transform 0.1s;
 }
 
 .pipe_sprite {
@@ -86,6 +87,7 @@
   .bird {
     width: 120px;
     height: 90;
+    transition: transform 0.1s;
   }
 
   .pipe {

@@ -4,6 +4,10 @@ let bird = document.querySelector(".bird");
 let img = document.getElementById("bird-1");
 let jumpSound = new Audio("/sounds/Jump-sound.mp3");
 let scoreSound = new Audio("/sounds/Score-point.mp3");
+let crashSound = new Audio("/sounds/oof-sound.mp3");
+
+let high_score_val = document.querySelector(".high_score_val");
+let highScore = localStorage.getItem("highScore") || 0;
 
 let bird_props = bird.getBoundingClientRect();
 
@@ -91,6 +95,13 @@ function play() {
       return;
     }
     bird.style.top = bird_props.top + bird_dy + "px";
+    if (bird_dy < 0) {
+      bird.style.transform = "rotate(-20deg)";
+    } else if (bird_dy > 5) {
+      bird.style.transform = "rotate(45deg)";
+    } else {
+      bird.style.transform = "rotate(0deg)";
+    }
     requestAnimationFrame(apply_gravity);
   }
   requestAnimationFrame(apply_gravity);
@@ -126,6 +137,15 @@ function play() {
 
 function gameOver() {
   game_state = "End";
+
+  crashSound.play();
+
+  let currentScore = parseInt(score_val.innerHTML);
+  if (currentScore > highScore) {
+    highScore = currentScore;
+    localStorage.setItem("highScore", highScore);
+    high_score_val.innerHTML = highScore;
+  }
   message.innerHTML =
     "Game Over".fontcolor("red") + "<br>Press ENTER to Restart";
   message.classList.add("messageStyle");
