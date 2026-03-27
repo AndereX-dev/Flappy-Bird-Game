@@ -16,7 +16,7 @@ img.style.display = "none";
 message.classList.add("messageStyle");
 
 document.addEventListener("keydown", (e) => {
-  if (e.key == "Enter" && game_state != "play") {
+  if (e.key == "Enter" && game_state != "Play") {
     document.querySelectorAll(".pipe_sprite").forEach((el) => {
       el.remove();
     });
