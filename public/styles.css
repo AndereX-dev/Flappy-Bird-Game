@@ -37,6 +37,7 @@
   height: 70vh;
   width: 6vw;
   background: radial-gradient(lightgreen 50%, green);
+  border: top;
 }
 
 .message {
@@ -84,6 +85,8 @@
 
   .score {
     font-size: 8vh;
+    display: none;
+    position: fixed;
   }
 
   .bird {

@@ -27,6 +27,7 @@ document.addEventListener("keydown", (e) => {
     message.innerHTML = "";
     score_title.innerHTML = "Score : ";
     score_val.innerHTML = "0";
+    document.querySelector(".score").style.display = "block";
     play();
   }
 
