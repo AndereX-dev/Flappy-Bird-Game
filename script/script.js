@@ -2,6 +2,8 @@ let move_speed = 3,
   gravity = 0.5;
 let bird = document.querySelector(".bird");
 let img = document.getElementById("bird-1");
+let jumpSound = new Audio("/sounds/Jump-sound.mp3");
+let scoreSound = new Audio("/sounds/Score-point.mp3");
 
 let bird_props = bird.getBoundingClientRect();
 
@@ -34,6 +36,8 @@ document.addEventListener("keydown", (e) => {
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
     bird_dy = -7.6;
     img.src = "/images/Doge-bird.png";
+    jumpSound.currentTime = 0;
+    jumpSound.play();
   }
 });
 
@@ -64,6 +68,9 @@ function play() {
             element.increase_score == "1"
           ) {
             score_val.innerHTML = +score_val.innerHTML + 1;
+
+            scoreSound.currentTime = 0;
+            scoreSound.play();
           }
           element.style.left = pipe_sprite_props.left - move_speed + "px";
         }
