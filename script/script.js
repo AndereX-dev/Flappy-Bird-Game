@@ -1,5 +1,6 @@
-let move_speed = 3,
-  gravity = 0.5;
+let move_speed = 3;
+let gravity = 0.5;
+let highScore = localStorage.getItem("highScore") || 0;
 let bird = document.querySelector(".bird");
 let img = document.getElementById("bird-1");
 let jumpSound = new Audio("/sounds/Jump-sound.mp3");
@@ -10,7 +11,6 @@ let high_score_val = document.querySelector(".high_score_val");
 if (high_score_val) {
   high_score_val.innerHTML = highScore;
 }
-let highScore = localStorage.getItem("highScore") || 0;
 
 let bird_props = bird.getBoundingClientRect();
 
@@ -25,21 +25,19 @@ img.style.display = "none";
 message.classList.add("messageStyle");
 
 document.addEventListener("keydown", (e) => {
-  if (e.key == "Enter") {
-    if (game_state == "Play") {
-      document.querySelectorAll(".pipe_sprite").forEach((el) => {
-        el.remove();
-      });
-      img.style.display = "block";
-      bird.style.top = "40vh";
-      bird_dy = 0;
-      score_title.innerHTML = "Score : ";
-      score_val.innerHTML = "0";
-      message.innerHTML = "";
-      message.classList.remove("messageStyle");
-      game_state = "Play";
-      play();
-    }
+  if (e.key == "Enter" && game_state != "Play") {
+    document.querySelectorAll(".pipe_sprite").forEach((el) => {
+      el.remove();
+    });
+    img.style.display = "block";
+    bird.style.top = "40vh";
+    bird_dy = 0;
+    game_state = "Play";
+    message.innerHTML = "";
+    score_title.innerHTML = "Score : ";
+    score_val.innerHTML = "0";
+    message.classList.remove("messageStyle");
+    play();
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
