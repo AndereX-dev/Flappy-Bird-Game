@@ -28,7 +28,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key == "Enter" && game_state != "Play") {
     document.querySelectorAll(".pipe_sprite").forEach((el) => el.remove());
     img.style.display = "block";
-    bird.style.top = "250px";
+    bird.style.top = "300px";
     bird_dy = 0;
     pipe_separation = 0;
     game_state = "Play";
@@ -57,10 +57,10 @@ function move() {
       } else {
         // Kollisjonssjekk
         if (
-          bird_props.left + 10 < pipe_props.left + pipe_props.width &&
-          bird_props.left + bird_props.width - 10 > pipe_props.left &&
-          bird_props.top + 10 < pipe_props.top + pipe_props.height &&
-          bird_props.top + bird_props.height - 10 > pipe_props.top
+          bird_props.left + 20 < pipe_props.left + pipe_props.width &&
+          bird_props.left + bird_props.width - 20 > pipe_props.left &&
+          bird_props.top + 20 < pipe_props.top + pipe_props.height &&
+          bird_props.top + bird_props.height - 20 > pipe_props.top
         ) {
           gameOver();
         } else {
@@ -83,24 +83,23 @@ function move() {
 }
 
 function apply_gravity() {
-  if (game_state == "Play") {
-    bird_dy += gravity;
-    let current_top =
-      parseFloat(bird.style.top) || bird.getBoundingClientRect().top;
-    bird.style.top = current_top + bird_dy + "px";
+  if (game_state == "Play") return;
+  bird_dy += gravity;
+  let current_top = parseFloat(bird.style.top);
+  if (isNaN(current_top)) current_top = 300;
 
-    let bird_props = bird.getBoundingClientRect();
-    let bg_props = document
-      .querySelector(".background")
-      .getBoundingClientRect();
+  let new_top = current_top + bird_dy;
+  bird.style.top = new_top + "px";
 
-    if (bird_props.top <= 0 || bird_props.bottom >= bg_props.bottom - 10) {
-      gameOver();
-    }
-
-    let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
-    bird.style.transform = `rotate(${rotation}deg)`;
+  bird_props = bird.getBoundingClientRect();
+  let bg_props = document.querySelector(".background").getBoundingClientRect();
+  if (bird_props.bottom >= bg_props.bottom - 20) {
+    gameOver();
+    return;
   }
+  let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
+  bird.style.transform = `rotate(${rotation}deg)`;
+
   requestAnimationFrame(apply_gravity);
 }
 
