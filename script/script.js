@@ -12,85 +12,83 @@ if (high_score_val) {
   high_score_val.innerHTML = highScore;
 }
 
-let bird_props = bird.getBoundingClientRect();
-
-let background = document.querySelector(".background").getBoundingClientRect();
 let score_val = document.querySelector(".score_val");
 let message = document.querySelector(".message");
 let score_title = document.querySelector(".score_title");
 
 let game_state = "Start";
 let bird_dy = 0;
+let pipe_separation = 0;
+let pipe_gap = 35;
+
 img.style.display = "none";
 message.classList.add("messageStyle");
 
 document.addEventListener("keydown", (e) => {
   if (e.key == "Enter" && game_state != "Play") {
-    document.querySelectorAll(".pipe_sprite").forEach((el) => {
-      el.remove();
-    });
+    document.querySelectorAll(".pipe_sprite").forEach((el) => el.remove());
     img.style.display = "block";
-    bird.style.top = "30vh";
+    bird.style.top = "250px";
     bird_dy = 0;
+    pipe_separation = 0;
     game_state = "Play";
     message.innerHTML = "";
     score_title.innerHTML = "Score : ";
     score_val.innerHTML = "0";
     message.classList.remove("messageStyle");
-    play();
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
     bird_dy = -7.6;
-    img.src = "/images/Doge-bird.png";
     jumpSound.currentTime = 0;
     jumpSound.play();
   }
 });
 
-function play() {
-  function move() {
-    if (game_state != "Play") return;
-
+function move() {
+  if (game_state == "Play") {
     let pipe_sprites = document.querySelectorAll(".pipe_sprite");
     pipe_sprites.forEach((element) => {
-      let pipe_sprite_props = element.getBoundingClientRect();
-      bird_props = bird.getBoundingClientRect();
+      let pipe_props = element.getBoundingClientRect();
+      let bird_props = bird.getBoundingClientRect();
 
-      if (pipe_sprite_props.right <= 0) {
+      if (pipe_props.right <= 0) {
         element.remove();
       } else {
+        // Kollisjonssjekk
         if (
-          bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width &&
-          bird_props.left + bird_props.width > pipe_sprite_props.left &&
-          bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height &&
-          bird_props.top + bird_props.height > pipe_sprite_props.top
+          bird_props.left + 10 < pipe_props.left + pipe_props.width &&
+          bird_props.left + bird_props.width - 10 > pipe_props.left &&
+          bird_props.top + 10 < pipe_props.top + pipe_props.height &&
+          bird_props.top + bird_props.height - 10 > pipe_props.top
         ) {
           gameOver();
-          return;
         } else {
+          // Poengsjekk
           if (
-            pipe_sprite_props.right < bird_props.left &&
-            pipe_sprite_props.right + move_speed >= bird_props.left &&
+            pipe_props.right < bird_props.left &&
+            pipe_props.right + move_speed >= bird_props.left &&
             element.increase_score == "1"
           ) {
             score_val.innerHTML = +score_val.innerHTML + 1;
-
             scoreSound.currentTime = 0;
             scoreSound.play();
           }
-          element.style.left = pipe_sprite_props.left - move_speed + "px";
+          element.style.left = pipe_props.left - move_speed + "px";
         }
       }
     });
-    requestAnimationFrame(move);
   }
   requestAnimationFrame(move);
+}
 
-  function apply_gravity() {
-    if (game_state != "Play") return;
-
+function apply_gravity() {
+  if (game_state == "Play") {
     bird_dy += gravity;
+    let current_top =
+      parseFloat(bird.style.top) || bird.getBoundingClientRect().top;
+    bird.style.top = current_top + bird_dy + "px";
+
     let bird_props = bird.getBoundingClientRect();
     let bg_props = document
       .querySelector(".background")
@@ -98,21 +96,16 @@ function play() {
 
     if (bird_props.top <= 0 || bird_props.bottom >= bg_props.bottom - 10) {
       gameOver();
-      return;
     }
-    bird.style.top = bird_props.top + bird_dy + "px";
+
     let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
     bird.style.transform = `rotate(${rotation}deg)`;
-    requestAnimationFrame(apply_gravity);
   }
   requestAnimationFrame(apply_gravity);
+}
 
-  let pipe_separation = 0;
-  let pipe_gap = 35;
-
-  function create_pipe() {
-    if (game_state != "Play") return;
-
+function create_pipe() {
+  if (game_state == "Play") {
     if (pipe_separation > 115) {
       pipe_separation = 0;
       let pipe_posi = Math.floor(Math.random() * 43) + 8;
@@ -131,14 +124,17 @@ function play() {
       document.body.appendChild(pipe);
     }
     pipe_separation++;
-    requestAnimationFrame(create_pipe);
   }
   requestAnimationFrame(create_pipe);
 }
 
-function gameOver() {
-  game_state = "End";
+requestAnimationFrame(move);
+requestAnimationFrame(apply_gravity);
+requestAnimationFrame(create_pipe);
 
+function gameOver() {
+  if (game_state == "End") return;
+  game_state = "End";
   crashSound.play();
 
   let currentScore = parseInt(score_val.innerHTML);
