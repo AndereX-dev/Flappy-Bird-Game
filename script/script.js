@@ -30,7 +30,7 @@ document.addEventListener("keydown", (e) => {
       el.remove();
     });
     img.style.display = "block";
-    bird.style.top = "40vh";
+    bird.style.top = "30vh";
     bird_dy = 0;
     game_state = "Play";
     message.innerHTML = "";
@@ -91,24 +91,18 @@ function play() {
     if (game_state != "Play") return;
 
     bird_dy += gravity;
-    bird_props = bird.getBoundingClientRect();
-
+    let bird_props = bird.getBoundingClientRect();
     let bg_props = document
       .querySelector(".background")
       .getBoundingClientRect();
 
-    if (bird_props.top <= 0 || bird_props.bottom >= bg_props.bottom) {
+    if (bird_props.top <= 0 || bird_props.bottom >= bg_props.bottom - 10) {
       gameOver();
       return;
     }
     bird.style.top = bird_props.top + bird_dy + "px";
-    if (bird_dy < 0) {
-      bird.style.transform = "rotate(-20deg)";
-    } else if (bird_dy > 5) {
-      bird.style.transform = "rotate(45deg)";
-    } else {
-      bird.style.transform = "rotate(0deg)";
-    }
+    let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
+    bird.style.transform = `rotate(${rotation}deg)`;
     requestAnimationFrame(apply_gravity);
   }
   requestAnimationFrame(apply_gravity);
