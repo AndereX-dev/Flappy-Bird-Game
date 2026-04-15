@@ -14,11 +14,15 @@
 .background {
   height: 100vh;
   width: 100vw;
+  max-width: 500px;
+  margin: 0 auto;
   background: url("/images/Background_image.png") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
 }
 
 .bird {
@@ -36,7 +40,7 @@
   top: 40vh;
   left: 100vw;
   height: 70vh;
-  width: 6vw;
+  width: 80px;
   background: radial-gradient(lightgreen 50%, green);
   border: 6px solid rgb(83, 83, 83);
 }
@@ -84,9 +88,13 @@
     white-space: nowrap;
   }
 
+  .pipe_sprite {
+    width: 60px;
+  }
+
   .bird {
     width: 120px;
-    height: 90;
+    height: 90px;
     transition: transform 0.1s;
   }
 
