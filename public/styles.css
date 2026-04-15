@@ -14,12 +14,9 @@
 .background {
   height: 100vh;
   width: 100vw;
-  max-width: 500px;
   margin: 0 auto;
   background: url("/images/Background_image.png") no-repeat center center fixed;
   background-size: cover;
-  position: relative;
-  overflow: hidden;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
