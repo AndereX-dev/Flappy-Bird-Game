@@ -149,7 +149,7 @@ function gameOver() {
     high_score_val.innerHTML = highScore;
   }
   message.innerHTML =
-    "Game Over".fontcolor("red") + "<br>Press ENTER to Restart";
+    "<span style='color: red;'>Game Over</span><br>Press ENTER to Restart";
   message.classList.add("messageStyle");
   img.style.display = "none";
 }
