@@ -92,7 +92,7 @@ function apply_gravity() {
     bird.style.top = new_top + "px";
     let bird_props = bird.getBoundingClientRect();
     let bg_props = document
-      .querySelector(".baackground")
+      .querySelector(".background")
       .getBoundingClientRect();
 
     if (bird_props.bottom >= bg_props.bottom - 20) {
