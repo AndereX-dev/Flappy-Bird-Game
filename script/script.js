@@ -109,8 +109,8 @@ function apply_gravity() {
 }
 
 function create_pipe() {
-  if (game_state == "Play") {
-    if (pipe_separation > 115) {
+  if (game_state != "Play") {
+    if (pipe_separation > 130) {
       pipe_separation = 0;
       let pipe_posi = Math.floor(Math.random() * 43) + 8;
 
@@ -118,6 +118,7 @@ function create_pipe() {
       pipe_inv.className = "pipe_sprite";
       pipe_inv.style.top = pipe_posi - 70 + "vh";
       pipe_inv.style.left = "100vw";
+      pipe_inv.increase_score = "0";
       document.body.appendChild(pipe_inv);
 
       let pipe = document.createElement("div");
