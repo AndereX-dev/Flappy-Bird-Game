@@ -71,6 +71,8 @@ function move() {
             element.increase_score == "1"
           ) {
             score_val.innerHTML = +score_val.innerHTML + 1;
+            element.increase_score = "0";
+
             scoreSound.currentTime = 0;
             scoreSound.play();
           }
