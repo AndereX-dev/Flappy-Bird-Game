@@ -67,11 +67,12 @@ function move() {
           // Poengsjekk
           if (
             pipe_props.right < bird_props.left &&
-            pipe_props.right + move_speed >= bird_props.left &&
+            element.dataset.passed !== "true" &&
             element.increase_score == "1"
           ) {
             score_val.innerHTML = +score_val.innerHTML + 1;
             element.increase_score = "0";
+            element.dataset.passed = "true";
 
             scoreSound.currentTime = 0;
             scoreSound.play();
