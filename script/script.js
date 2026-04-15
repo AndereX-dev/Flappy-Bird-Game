@@ -109,7 +109,7 @@ function apply_gravity() {
 }
 
 function create_pipe() {
-  if (game_state != "Play") {
+  if (game_state == "Play") {
     if (pipe_separation > 130) {
       pipe_separation = 0;
       let pipe_posi = Math.floor(Math.random() * 43) + 8;
