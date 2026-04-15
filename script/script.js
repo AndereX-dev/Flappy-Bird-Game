@@ -83,23 +83,25 @@ function move() {
 }
 
 function apply_gravity() {
-  if (game_state == "Play") return;
-  bird_dy += gravity;
-  let current_top = parseFloat(bird.style.top);
-  if (isNaN(current_top)) current_top = 300;
+  if (game_state == "Play") {
+    bird_dy += gravity;
+    let current_top = parseFloat(bird.style.top);
+    if (isNaN(current_top)) current_top = 300;
 
-  let new_top = current_top + bird_dy;
-  bird.style.top = new_top + "px";
+    let new_top = current_top + bird_dy;
+    bird.style.top = new_top + "px";
+    let bird_props = bird.getBoundingClientRect();
+    let bg_props = document
+      .querySelector(".baackground")
+      .getBoundingClientRect();
 
-  bird_props = bird.getBoundingClientRect();
-  let bg_props = document.querySelector(".background").getBoundingClientRect();
-  if (bird_props.bottom >= bg_props.bottom - 20) {
-    gameOver();
-    return;
+    if (bird_props.bottom >= bg_props.bottom - 20) {
+      gameOver();
+      return;
+    }
+    let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
+    bird.style.transform = `rotate(${rotation}deg)`;
   }
-  let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
-  bird.style.transform = `rotate(${rotation}deg)`;
-
   requestAnimationFrame(apply_gravity);
 }
 
