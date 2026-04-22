@@ -25,6 +25,54 @@ let pipe_gap = 35;
 img.style.display = "none";
 message.classList.add("messageStyle");
 
+function startGame() {
+  document.getElementById("startMenu").style.display = "none";
+  initGame();
+}
+
+function showCharacterMenu() {
+  document.getElementById("startMenu").style.display = "none";
+  document.getElementById("charMenu").style.display = "block";
+}
+
+function hideCharacterMenu() {
+  document.getElementById("charMenu").style.display = "none";
+  document.getElementById("startMenu").style.display = "block";
+}
+
+function selectChar(imgName) {
+  const birdImg = document.querySelector(".bird");
+  birdImg.src = "/images/" + imgName;
+  document.getElementById("menuBird").src = "/images/" + imgName;
+
+  localStorage.setItem("selectedChar", imgName);
+  hideCharacterMenu();
+}
+
+function initGame() {
+  document.querySelectorAll(".pipe_sprite").forEach((el) => el.remove());
+  img.style.display = "block";
+  bird.style.top = "300px";
+  bird_dy = 0;
+  pipe_separation = 0;
+  game_state = "Play";
+  message.innerHTML = "";
+  score_title.innerHTML = "Score : ";
+  score_val.innerHTML = "0";
+  message.classList.remove("messageStyle");
+
+  requestAnimationFrame(move);
+  requestAnimationFrame(apply_gravity);
+  requestAnimationFrame(create_pipe);
+}
+
+window.onload = () => {
+  let savedChar = localStorage.getItem("selectedChar");
+  if (savedChar) {
+    selectChar(savedChar);
+  }
+};
+
 document.addEventListener("keydown", (e) => {
   if (e.key == "Enter" && game_state != "Play") {
     document.querySelectorAll(".pipe_sprite").forEach((el) => el.remove());

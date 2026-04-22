@@ -11,6 +11,57 @@
     "SHLN" 50;
 }
 
+.menu-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 300;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.menu-bird {
+  width: 100px;
+  margin-bottom: 20px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.main-btn {
+  display: block;
+  width: 200px;
+  padding: 150px;
+  margin: 10px auto;
+  font-size: 24px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sub-btn {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20);
+  }
+}
+
 .background {
   height: 100vh;
   width: 100vw;
