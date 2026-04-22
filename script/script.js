@@ -1,3 +1,4 @@
+let pauseMenu = document.getElementById("pauseMenu");
 let move_speed = 3;
 let gravity = 0.5;
 let highScore = localStorage.getItem("highScore") || 0;
@@ -36,6 +37,10 @@ document.addEventListener("keydown", (e) => {
     score_title.innerHTML = "Score : ";
     score_val.innerHTML = "0";
     message.classList.remove("messageStyle");
+
+    requestAnimationFrame(move);
+    requestAnimationFrame(apply_gravity);
+    requestAnimationFrame(create_pipe);
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
@@ -43,9 +48,24 @@ document.addEventListener("keydown", (e) => {
     jumpSound.currentTime = 0;
     jumpSound.play();
   }
+
+  if (e.key == "Escape") {
+    if (game_state == "Play") {
+      game_state = "Paused";
+      pauseMenu.style.display = "block";
+    } else if (game_state == "Paused") {
+      game_state = "Play";
+      pauseMenu.style.display = "none";
+
+      requestAnimationFrame(move);
+      requestAnimationFrame(apply_gravity);
+      requestAnimationFrame(create_pipe);
+    }
+  }
 });
 
 function move() {
+  if (game_state !== "Play") return;
   if (game_state == "Play") {
     let pipe_sprites = document.querySelectorAll(".pipe_sprite");
     pipe_sprites.forEach((element) => {
@@ -86,6 +106,7 @@ function move() {
 }
 
 function apply_gravity() {
+  if (game_state !== "Play") return;
   if (game_state == "Play") {
     bird_dy += gravity;
     let current_top = parseFloat(bird.style.top);
@@ -109,6 +130,7 @@ function apply_gravity() {
 }
 
 function create_pipe() {
+  if (game_state !== "Play") return;
   if (game_state == "Play") {
     if (pipe_separation > 130) {
       pipe_separation = 0;
