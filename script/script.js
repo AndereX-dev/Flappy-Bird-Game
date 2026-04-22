@@ -85,6 +85,12 @@ document.addEventListener("keydown", (e) => {
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
+    let currentBird = localStorage.getItem("selectedChar");
+    if (currentBird === "Nyan-bird.png") {
+      createRanibowTrail();
+    } else if (currentBird === "Rage-bird.png") {
+      shakeScreen();
+    }
     bird_dy = -7.6;
     jumpSound.currentTime = 0;
     jumpSound.play();
