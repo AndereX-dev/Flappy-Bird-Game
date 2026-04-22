@@ -42,8 +42,11 @@ function hideCharacterMenu() {
 
 function selectChar(imgName) {
   const birdImg = document.querySelector(".bird");
+  const birdInGame = document.getElementById("bird-1");
+  const birdInMenu = document.getElementById("menuBird");
   birdImg.src = "/images/" + imgName;
-  document.getElementById("menuBird").src = "/images/" + imgName;
+  birdInGame.src = "/images/" + imgName;
+  birdInMenu.src = "/images/" + imgName;
 
   localStorage.setItem("selectedChar", imgName);
   hideCharacterMenu();
@@ -75,20 +78,10 @@ window.onload = () => {
 
 document.addEventListener("keydown", (e) => {
   if (e.key == "Enter" && game_state != "Play") {
-    document.querySelectorAll(".pipe_sprite").forEach((el) => el.remove());
-    img.style.display = "block";
-    bird.style.top = "300px";
-    bird_dy = 0;
-    pipe_separation = 0;
-    game_state = "Play";
-    message.innerHTML = "";
-    score_title.innerHTML = "Score : ";
-    score_val.innerHTML = "0";
-    message.classList.remove("messageStyle");
+    let startMenu = document.getElementById("startMenu");
+    if (startMenu) startMenu.style.display = "nono";
 
-    requestAnimationFrame(move);
-    requestAnimationFrame(apply_gravity);
-    requestAnimationFrame(create_pipe);
+    initGame();
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
