@@ -85,6 +85,7 @@ document.addEventListener("keydown", (e) => {
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
+    // Husk å legge til spesialeffekter for forskjellige fugler her, basert på det valgte karakterbildene. For eksempel:
     /*let currentBird = localStorage.getItem("selectedChar");
     if (currentBird === "Nyan-bird.png") {
       createRanibowTrail();
