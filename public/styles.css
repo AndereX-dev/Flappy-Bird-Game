@@ -210,9 +210,21 @@
   animation: shake 0.1s;
 }
 
-.red-flash {
-  background-color: red !important;
-  transition: background 0.1s;
+#flash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: red;
+  opacity: 0;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.flash-active {
+  opacity: 0.5 !important;
 }
 
 @keyframes fadeOut {

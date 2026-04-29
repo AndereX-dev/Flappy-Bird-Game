@@ -115,10 +115,11 @@ document.addEventListener("keydown", (e) => {
 
     let currentBird = localStorage.getItem("selectedChar");
     if (currentBird === "Rage-bird.png") {
-      document.body.classList.add("shake");
+      let bg = document.querySelector(".background");
+      bg.classList.add("shake");
 
       setTimeout(() => {
-        document.body.classList.remove("shake");
+        bg.classList.remove("shake");
       }, 100);
     }
   }
@@ -241,9 +242,9 @@ function gameOver() {
 
   let currentBird = localStorage.getItem("selectedChar");
   if (currentBird === "Rage-bird.png") {
-    let bg = document.querySelector(".background");
-    bg.classList.add("red-flash");
-    setTimeout(() => bg.classList.remove("red-flash"), 150);
+    let flash = document.getElementById("flash-overlay");
+    flash.classList.add("flash-active");
+    setTimeout(() => flash.classList.remove("flash-active"), 150);
   }
 
   let currentScore = parseInt(score_val.innerHTML);
