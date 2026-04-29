@@ -47,6 +47,24 @@ function createRainbowTrail() {
   });
 }
 
+function createPopcornEffect() {
+  const birdProps = bird.getBoundingClientRect();
+
+  for (let i = 0; i < 4; i++) {
+    let bit = document.createElement("div");
+    bit.className = "popcorn-bit";
+
+    const xDiff = (Math.random() - 0.5) * 40;
+    bit.style.setProperty("--xdiff", `${xDiff}px`);
+
+    bit.style.left = birdProps.left + birdProps.width / 2 + "px";
+    bit.style.top = birdProps.top + birdProps.width / 2 + "px";
+
+    doocument.body.appendChild(bit);
+    setTimeout(() => bit.remove(), 800);
+  }
+}
+
 /*########## GAME PLAY #############*/
 
 function startGame() {
@@ -121,6 +139,8 @@ document.addEventListener("keydown", (e) => {
       setTimeout(() => {
         bg.classList.remove("shake");
       }, 100);
+    } else if (currentBird === "Popcorn-bird.png") {
+      createPopcornEffect();
     }
   }
 

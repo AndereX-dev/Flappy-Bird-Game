@@ -208,6 +208,17 @@
   filter: blur(2px);
 }
 
+.popcorn-bit {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: wheat;
+  border-radius: 40% 60% 70% 30%;
+  z-index: 95;
+  pointer-events: none;
+  animation: pop-and-fall 0.8s ease-out forwards;
+}
+
 .shake {
   animation: shake 0.1s;
 }
@@ -255,6 +266,17 @@
   }
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@keyframes pop-and-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--xdiff), 100px) rotate(360deg);
+    opacity: 0;
   }
 }
 
