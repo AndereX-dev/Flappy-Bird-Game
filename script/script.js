@@ -54,13 +54,16 @@ function createPopcornEffect() {
     let bit = document.createElement("div");
     bit.className = "popcorn-bit";
 
+    bit.style.backgroundColor = "white";
+    bit.style.border = "1px solid #ddd";
+
     const xDiff = (Math.random() - 0.5) * 40;
     bit.style.setProperty("--xdiff", `${xDiff}px`);
 
     bit.style.left = birdProps.left + birdProps.width / 2 + "px";
-    bit.style.top = birdProps.top + birdProps.width / 2 + "px";
+    bit.style.top = birdProps.top + birdProps.height / 2 + "px";
 
-    doocument.body.appendChild(bit);
+    document.body.appendChild(bit);
     setTimeout(() => bit.remove(), 800);
   }
 }
