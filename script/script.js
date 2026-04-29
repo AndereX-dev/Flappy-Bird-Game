@@ -25,6 +25,30 @@ let pipe_gap = 35;
 img.style.display = "none";
 message.classList.add("messageStyle");
 
+/*########## GAME EFFECTS #############*/
+
+function createRainbowTrail() {
+  const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+  const birdProps = bird.getBoundingClientRect();
+
+  colors.forEach((color, index) => {
+    let bit = document.createElement("div");
+    bit.className = "rainbow-bit";
+    bit.style.backgroundColor = color;
+
+    bit.style.left = birdProps.left - 10 + "px";
+    bit.style.top = birdProps.top + index * 8 + "px";
+
+    document.body.appendChild(bit);
+
+    setTimeout(() => {
+      bit.remove();
+    }, 500);
+  });
+}
+
+/*########## GAME PLAY #############*/
+
 function startGame() {
   document.getElementById("startMenu").style.display = "none";
   initGame();
@@ -85,14 +109,6 @@ document.addEventListener("keydown", (e) => {
   }
 
   if ((e.key == "ArrowUp" || e.key == " ") && game_state == "Play") {
-    // Husk å legge til spesialeffekter for forskjellige fugler her, basert på det valgte karakterbildene. For eksempel:
-    /*let currentBird = localStorage.getItem("selectedChar");
-    if (currentBird === "Nyan-bird.png") {
-      createRanibowTrail();
-    } else if (currentBird === "Rage-bird.png") {
-      shakeScreen();
-    }*/
-
     bird_dy = -7.6;
     jumpSound.currentTime = 0;
     jumpSound.play();
@@ -174,6 +190,11 @@ function apply_gravity() {
     }
     let rotation = Math.min(Math.max(bird_dy * 4, -20), 45);
     bird.style.transform = `rotate(${rotation}deg)`;
+
+    let currentBird = localStorage.getItem("selectedChar");
+    if (currentBird === "Nyan-bird.png") {
+      createRanibowTrail();
+    }
   }
   requestAnimationFrame(apply_gravity);
 }

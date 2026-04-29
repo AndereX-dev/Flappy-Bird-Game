@@ -197,6 +197,26 @@
   font-weight: bold;
 }
 
+.rainbow-bit {
+  position: fixed;
+  width: 20px;
+  height: 10px;
+  z-index: 90;
+  pointer-events: none;
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .message {
     font-size: 50px;
