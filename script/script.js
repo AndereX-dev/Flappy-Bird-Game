@@ -103,7 +103,7 @@ window.onload = () => {
 document.addEventListener("keydown", (e) => {
   if (e.key == "Enter" && game_state != "Play") {
     let startMenu = document.getElementById("startMenu");
-    if (startMenu) startMenu.style.display = "nono";
+    if (startMenu) startMenu.style.display = "none";
 
     initGame();
   }
@@ -112,6 +112,15 @@ document.addEventListener("keydown", (e) => {
     bird_dy = -7.6;
     jumpSound.currentTime = 0;
     jumpSound.play();
+
+    let currentBird = localStorage.getItem("selectedChar");
+    if (currentBird === "Rage-bird.png") {
+      document.body.classList.add("shake");
+
+      setTimeout(() => {
+        document.body.classList.remove("shake");
+      }, 100);
+    }
   }
 
   if (e.key == "Escape") {
@@ -193,7 +202,7 @@ function apply_gravity() {
 
     let currentBird = localStorage.getItem("selectedChar");
     if (currentBird === "Nyan-bird.png") {
-      createRanibowTrail();
+      createRainbowTrail();
     }
   }
   requestAnimationFrame(apply_gravity);
@@ -225,14 +234,17 @@ function create_pipe() {
   requestAnimationFrame(create_pipe);
 }
 
-requestAnimationFrame(move);
-requestAnimationFrame(apply_gravity);
-requestAnimationFrame(create_pipe);
-
 function gameOver() {
   if (game_state == "End") return;
   game_state = "End";
   crashSound.play();
+
+  let currentBird = localStorage.getItem("selectedChar");
+  if (currentBird === "Rage-bird.png") {
+    let bg = document.querySelector(".background");
+    bg.classList.add("red-flash");
+    setTimeout(() => bg.classList.remove("red-flash"), 150);
+  }
 
   let currentScore = parseInt(score_val.innerHTML);
   if (currentScore > highScore) {
