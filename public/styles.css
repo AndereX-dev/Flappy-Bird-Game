@@ -203,6 +203,7 @@
   height: 10px;
   z-index: 90;
   pointer-events: none;
+  opacity: 0.6;
   animation: fadeOut 1s forwards;
 }
 
@@ -229,7 +230,7 @@
 
 @keyframes fadeOut {
   0% {
-    opacity: 1;
+    opacity: 0.6;
     transform: scale(1);
   }
   100% {
