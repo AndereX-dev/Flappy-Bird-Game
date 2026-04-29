@@ -199,12 +199,13 @@
 
 .rainbow-bit {
   position: fixed;
-  width: 30px;
+  width: 60px;
   height: 10px;
   z-index: 90;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 1;
   animation: fadeOut 1s forwards;
+  filter: blur(2px);
 }
 
 .shake {
@@ -230,7 +231,7 @@
 
 @keyframes fadeOut {
   0% {
-    opacity: 0.6;
+    opacity: 1;
     transform: scale(1);
   }
   100% {
