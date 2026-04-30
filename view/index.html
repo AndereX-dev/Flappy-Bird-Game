@@ -11,55 +11,129 @@
       rel="stylesheet"
       href="/public/styles.css"
     />
-    <script src="/script/script.js" defer></script>
+    <script
+      src="/script/script.js"
+      defer
+    ></script>
     <link
       rel="icon"
       type="icon/png"
       href="/images/Raven-icon.svg"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Honk:MORF@15&display=swap"       rel="stylesheet">
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Honk:MORF@15&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="startMenu" class="menu-container">
-      <img src="/images/Doge-bird.png" alt="Doge-bird" class="menu-bird" id="menuBird">
+    <div
+      id="startMenu"
+      class="menu-container"
+    >
+      <img
+        src="/images/Doge-bird.png"
+        alt="Doge-bird"
+        class="menu-bird"
+        id="menuBird"
+      />
       <h1>DOGE-BIRD</h1>
-      <button onclick="startGame()" class="main-btn">START</button>
-      <button onclick="showCharacterMenu()" class="sub-btn">Change Character</button>
+      <button
+        onclick="startGame()"
+        class="main-btn"
+      >
+        START
+      </button>
+      <button
+        onclick="showCharacterMenu()"
+        class="sub-btn"
+      >
+        Change Character
+      </button>
     </div>
 
-    <div id="charMenu" class="menu-container" style="display: none;">
+    <div
+      id="charMenu"
+      class="menu-container"
+      style="display: none"
+    >
       <h2>Choose Character</h2>
       <div class="char-grid">
-        <img src="/images/Doge-bird.png" onclick="selectChar('Doge-bird.png')" alt="Doge-Bird">
-        <img src="/images/Orignal-bird.png" onclick="selectChar('Orignal-bird.png')" alt="Original-Bird">
-        <img src="/images/Floppy-bird.png" onclick="selectChar('Floppy-bird.png')" alt="Floppy-Bird">
-        <img src="/images/Nyan-bird.png" onclick="selectChar('Nyan-bird.png')" alt="Nyan-Bird">
-        <img src="/images/Popcorn-bird.png" onclick="selectChar('Popcorn-bird.png')" alt="Popcorn-Bird">
-        <img src="/images/Rage-bird.png" onclick="selectChar('Rage-bird.png')" alt="Rage-Bird">
+        <img
+          src="/images/Doge-bird.png"
+          onclick="selectChar('Doge-bird.png')"
+          alt="Doge-Bird"
+        />
+        <img
+          src="/images/Orignal-bird.png"
+          onclick="selectChar('Orignal-bird.png')"
+          alt="Original-Bird"
+        />
+        <img
+          src="/images/Floppy-bird.png"
+          onclick="selectChar('Floppy-bird.png')"
+          alt="Floppy-Bird"
+        />
+        <img
+          src="/images/Nyan-bird.png"
+          onclick="selectChar('Nyan-bird.png')"
+          alt="Nyan-Bird"
+        />
+        <img
+          src="/images/Popcorn-bird.png"
+          onclick="selectChar('Popcorn-bird.png')"
+          alt="Popcorn-Bird"
+        />
+        <img
+          src="/images/Rage-bird.png"
+          onclick="selectChar('Rage-bird.png')"
+          alt="Rage-Bird"
+        />
       </div>
-      <button onclick="hideCharacterMenu()" class="sub-btn">Back</button>
-    </div>
-    
-    <div class="background"></div>
-    <img src="/images/Doge-bird.png" alt="invalid-img" class="bird" id="bird-1">
-    <div class="message">
-        Enter to Start Game <p <span style="color: red;">&uarr;</span>ArrowUp to Control</p>
+      <button
+        onclick="hideCharacterMenu()"
+        class="sub-btn"
+      >
+        Back
+      </button>
     </div>
 
-    <div class="pause-menu" id="pauseMenu" style="display: none;">
+    <div class="background"></div>
+    <img
+      src="/images/Doge-bird.png"
+      alt="invalid-img"
+      class="bird"
+      id="bird-1"
+    />
+    <div class="message">
+      Press ENTER to Start Game
+      <p><span style="color: red">&uarr;</span>ArrowUp to Control</p>
+    </div>
+
+    <div
+      class="pause-menu"
+      id="pauseMenu"
+      style="display: none"
+    >
       <h1>PAUSED</h1>
       <p>Press ESC to continue</p>
       <button onclick="location.reload()">Restart Game</button>
     </div>
 
     <div class="score">
-        <span class="score_title"></span>
-        <span class="score_val"></span>
-        <br>
-        <span class="high_score_title">Highscore : </span>
-        <span class="high_score_val">0</span>
+      <span class="score_title"></span>
+      <span class="score_val"></span>
+      <br />
+      <span class="high_score_title">Highscore : </span>
+      <span class="high_score_val">0</span>
     </div>
     <div id="flash-overlay"></div>
   </body>
