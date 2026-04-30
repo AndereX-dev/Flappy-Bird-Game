@@ -276,8 +276,19 @@ function gameOver() {
     localStorage.setItem("highScore", highScore);
     high_score_val.innerHTML = highScore;
   }
-  message.innerHTML =
-    "<span style='color: red;'>Game Over</span><br>Press ENTER to Restart";
+  message.innerHTML = `<span style='color: red;'>Game Over</span><br>Press ENTER to Restart<br><button onclick="goToMenu()" class="sun-btn" style="margin-top: 15px;">Change Character</button>`;
+
   message.classList.add("messageStyle");
   img.style.display = "none";
+}
+
+function goToMenu() {
+  game_state = "Start";
+
+  message.innerHTML = "";
+  message.classList.remove("messageStyle");
+  if (pauseMenu) pauseMenu.style.display = "none";
+
+  document.getElementById("startMenu").style.display = "block";
+  document.querySelectorAll(".pipe_sprite").forEach((el) => el.remove());
 }
